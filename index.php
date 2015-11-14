@@ -27,11 +27,11 @@
 
     <?php
 
-    session_start();
+    
 
     include 'connect.php';
 
-    $sql = "SELECT * FROM shouts ORDER BY id DESC";
+    $sql = "SELECT * FROM shouts ORDER BY shout_id DESC";
     $result = mysqli_query($conn, $sql);
 
     echo "<div id='shouts'>";
@@ -41,8 +41,8 @@
         while($row = mysqli_fetch_assoc($result)) {
             echo "
                 <div class='shout'>
-                    <span class='title'>".$row["author"].":</span>
-                    <div class='content'>".$row["content"]."</div>
+                    <span class='title'>".$row["shout_author"].":</span>
+                    <div class='content'>".$row["shout_content"]."</div>
                 </div>
             ";
         }

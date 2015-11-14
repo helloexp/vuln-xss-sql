@@ -22,13 +22,13 @@ if ($action == "signup") {
 
         include 'connect.php';
 
-        $sql = "SELECT * FROM users WHERE username='" . $acc_username . "';";
+        $sql = "SELECT * FROM users WHERE user_name='" . $acc_username . "';";
         $result = mysqli_query($conn, $sql);
 
         if (mysqli_num_rows($result) > 0) {
             toHome("This username is already taken.");
         } else {
-            $sql = "INSERT INTO users (username, password) VALUES ('" . $acc_username . "','" . md5($acc_password) . "');";
+            $sql = "INSERT INTO users (user_name, user_pass) VALUES ('" . $acc_username . "','" . md5($acc_password) . "');";
             if (mysqli_query($conn, $sql)) {
                 session_start();
                 $_SESSION['login_username'] = $acc_username;
@@ -55,7 +55,7 @@ if ($action == "signup") {
         $login_username = trim($_POST['username']);
         $login_password = $_POST['password'];
 
-        $sql = "SELECT * FROM users WHERE username='".$login_username."' AND password='".md5($login_password)."';";
+        $sql = "SELECT * FROM users WHERE user_name='".$login_username."' AND user_pass='".md5($login_password)."';";
         $result = mysqli_query($conn, $sql);
 
         if (!$result) {
@@ -63,7 +63,7 @@ if ($action == "signup") {
             echo "Message from SQL: ".mysqli_error($conn);
         } elseif (mysqli_num_rows($result) > 0) {
             $row = mysqli_fetch_assoc($result);
-            $_SESSION['login_username'] = $row['username'];
+            $_SESSION['login_username'] = $row['user_name'];
             toHome("Logged in as ".$login_username);
         } else {
             toHome("Invalid login");
@@ -87,7 +87,7 @@ if ($action == "signup") {
         toHome("You must type a message to post.");
     }
 
-    $sql = "INSERT INTO shouts (author, content) VALUES ('".$_SESSION["login_username"]."', '".$postcontent."');";
+    $sql = "INSERT INTO shouts (shout_author, shout_content) VALUES ('".$_SESSION["login_username"]."', '".$postcontent."');";
     echo "<script>window.location.href='index.html?message='".$_SESSION["login_username"]."</script>";
 
     if(mysqli_query($conn, $sql)) {
