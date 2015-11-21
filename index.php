@@ -22,7 +22,7 @@
 
     <div id="intro">
         <h1>Shoutbox!</h1>
-        <p>This site is meant to be demonstration of XSS and SQL Injection vulnerabilities, for educational purposes only. All posts are cleared every five minutes.</p>
+        <p>This site is meant to be demonstration of XSS and SQL Injection vulnerabilities, for educational purposes only. All posts are cleared every five minutes. Thanks to Eli for styling!</p>
     </div>
 
     <?php
