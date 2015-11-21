@@ -1,88 +1,121 @@
 <html>
 <head>
-<title>Hello</title>
+    <title>Shoutbox!</title>
+    <?php include 'global.php'; ?>
+    <link rel="stylesheet" type="text/css" href="index.css">
 </head>
+
 <body>
-<h1>Shoutbox</h1>
-<i>This site is meant to be demonstration of XSS and SQL Injection vulnerabilities, for educational purposes only. All posts are cleared every five minutes.</i>
-<br>
-<?php
-session_start();
 
-if(!isset($_SESSION['login_username'])){
-	echo "<p>You are not logged in. You must log in to post.</p>";
-}
-else{
-?>
-You are logged in as <font color="green"><b><?php echo $_SESSION['login_username']; ?>.</b></font><br>
-<a href="logout.php">Log out</a><br><br>
+<div id="wrap">
 
-<?php
-}
-?>
-<h2>Public shouts:</h2>
-<br>
-<?php
-$servername = "localhost";
-$username = "shoutbox";
-$password = "redacted";
-$dbname = "shoutbox";
-// Create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+    <?php
 
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-$sql = "SELECT shout_id, shout_author, shout_content, submission_date FROM shouts ORDER BY shout_id desc";
-$result = mysqli_query($conn, $sql);
-if (mysqli_num_rows($result) > 0){
-	while($row = mysqli_fetch_assoc($result)){
-		echo "<hr>";		
-		echo "<b>".$row["shout_author"]."</b> posted on ".$row["submission_date"].":<br>";
-		echo $row["shout_content"];
-		echo "<hr>";
-	}
-}
-else {
-	echo "No public shouts have been posted yet :(";
-}
-mysqli_close($conn);
-?>
-<?php
-if(isset($_SESSION['login_username'])){
+    session_start();
+    $message = $_SESSION['message'];
+    if (isset($message)) {
+        echo "<div id='alert'>".$message."</div>";
+        unset($_SESSION['message']);
+    }
 
-?>
+    ?>
 
-<h2>Post a shoutout:</h2>
-<form name="postshout" action="post.php" method="post">
-Your message here:<br>
-<textarea rows="5" name="postcontent">Enter message...</textarea>
+    <div id="intro">
+        <h1>Shoutbox!</h1>
+        <p>This site is meant to be demonstration of XSS and SQL Injection vulnerabilities, for educational purposes only. All posts are cleared every five minutes.</p>
+    </div>
 
-<input type="submit" value="Submit">
-</form>
-<?php
-}
-else{
+    <?php
 
-?>
-<br>
-<h2>Login</h2>
-<form name="login" action="login.php" method="post">
-Username:<br><input type="text" name="username"><br>
-Password:<br><input type="password" name="password"><br>
-<input type="submit" value="Login">
-</form>
+    
 
-<h2>Register</h2>
-<form name="login" action="register.php" method="post">
-Username:<br><input type="text" name="username"><br>
-Password:<br><input type="password" name="password"><br>
-Confirm Password:<br><input type="password" name="passwordconfirm"><br>
-<input type="submit" value="Register">
-</form>
-<?php
-}
-?>
+    include 'connect.php';
+
+    $sql = "SELECT * FROM shouts ORDER BY shout_id DESC";
+    $result = mysqli_query($conn, $sql);
+
+    echo "<div id='shouts'>";
+    echo "<h2>Posted shouts</h2>";
+
+    if (mysqli_num_rows($result) > 0) {
+        while($row = mysqli_fetch_assoc($result)) {
+            echo "
+                <div class='shout'>
+                    <span class='title'>".$row["shout_author"].":</span>
+                    <div class='content'>".$row["shout_content"]."</div>
+                </div>
+            ";
+        }
+    } else {
+        echo "<div id='noShouts'>No shouts have been posted yet :(</div>";
+    }
+    mysqli_close($conn);
+
+    echo "</div>";
+
+    if(isset($_SESSION['login_username'])){
+        echo "
+            <div id='loggedIn'>
+
+                <h2>Post a shout</h2>
+        
+                <p>Posting as ".$_SESSION["login_username"]."</p>
+
+                <button id='logOut'>Log out</button>
+
+                <div id='postShout'>
+                    <form name='shout' action='action.php?action=post' method='post'>
+                        <label for='content'>Speak your heart:</label>
+                        <textarea name='content'></textarea>
+                        <input type='submit' method='Post' value='Post'>
+                    </form>
+                </div>
+
+            </div>
+        ";
+
+    } else {
+
+        echo "
+    <div id='notLoggedIn'>
+
+        <h2>You are not logged in. You must log in to post.</h2>
+
+        <h4>Log in</h4>
+        <div id='logIn'>
+            <form name='signup' action='action.php?action=login' method='post'>
+                <label for='username'>Username:</label>
+                <input type='text' name='username'>
+                <label for='password'>Password:</label>
+                <input type='password' name='password'>
+                <input type='submit' value='Log in'>
+            </form>
+        </div>
+
+        <h4>Sign up</h4>
+        <div id='signUp'>
+            <form name='signUp' action='action.php?action=signup' method='post'>
+                <label for='username'>Create a username:</label>
+                <input type='text' name='username'>
+                <label for='password'>Create a password</label>
+                <input type='password' name='password'>
+                <label for='password_confirm'>Confirm Password:</label>
+                <input type='password' name='password_confirm'>
+                <input type='submit' value='Sign up'>
+            </form>
+        </div>
+
+    </div>
+    ";
+    }
+
+    ?>
+</div>
+
+
+
+<script type="text/javascript" src="index.js"></script>
+
+
 </body>
 </html>
