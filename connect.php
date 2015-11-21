@@ -1,8 +1,8 @@
 <?php
 
 $servername = "localhost";
-$db_username = "";
-$db_password = "";
+$db_username = "shoutbox";
+$db_password = "db_s3cret_shoutbox";
 $dbname = "shoutbox";
 
 // Create connection
