@@ -61,10 +61,10 @@ if(isset($_SESSION['login_username'])){
 
 <h2>Post a shoutout:</h2>
 <form name="postshout" action="post.php" method="get">
-Your message here:<br>
-<textarea rows="5" name="postcontent">Enter message...</textarea>
-
-<input type="submit" value="Submit">
+<br>
+<textarea rows="5" class="form-control" placeholder="What's on your mind?" name="postcontent"></textarea>
+<br>
+<input type="submit" class="btn btn-default" value="Submit">
 </form>
 <?php
 }
@@ -73,10 +73,16 @@ else{
 ?>
 <br>
 <h2>Login</h2>
-<form name="login" action="login.php" method="post">
-Username:<br><input type="text" name="username"><br>
-Password:<br><input type="password" name="password"><br>
-<input type="submit" value="Login">
+<form name="login" role="form" action="login.php" method="post">
+	<div class="form-group">
+		<label for="username">Username:</label>
+		<input type="text" placeholder="Enter username" class="form-control" name="username">
+	</div>
+	<div class="form-group">
+		<label for="password">Password:</label>
+		<input type="password" class="form-control" placeholder="Enter password" name="password">
+	</div>
+<input type="submit" class="btn btn-default" value="Login">
 </form>
 
 <h2>Register</h2>
