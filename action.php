@@ -80,8 +80,8 @@ if ($action == "signup") {
     session_start();
     include 'connect.php';
 
-    $postcontent = mysqli_real_escape_string($conn,$_POST['content']);
-    $postcontent = $_POST['content'];
+    $postcontent = mysqli_real_escape_string($conn,$_GET['content']);
+    $postcontent = $_GET['content'];
 
     if(strlen($postcontent) == 0){
         toHome("You must type a message to post.");
