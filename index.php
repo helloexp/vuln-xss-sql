@@ -25,17 +25,7 @@ You are logged in as <font color="green"><b><?php echo $_SESSION['login_username
 <h2>Public shouts:</h2>
 <br>
 <?php
-$servername = "localhost";
-$username = "shoutbox";
-$password = "redacted";
-$dbname = "shoutbox";
-// Create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+include('connect.php');
 $sql = "SELECT shout_id, shout_author, shout_content, submission_date FROM shouts ORDER BY shout_id desc";
 $result = mysqli_query($conn, $sql);
 if (mysqli_num_rows($result) > 0){
