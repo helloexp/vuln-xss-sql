@@ -1,16 +1,6 @@
 <?php
 session_start();
-$servername = "localhost";
-$db_username = "shoutbox";
-$db_password = "redacted";
-$dbname = "shoutbox";
-// Create connection
-$conn = mysqli_connect($servername, $db_username, $db_password, $dbname);
-
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+include('connect.php');
 
 if(!isset($_SESSION['login_username'])){
 	echo "You must log in to make posts.";
