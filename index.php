@@ -1,9 +1,20 @@
 <html>
 <head>
 <title>Hello</title>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body>
-
+<div class="container">
 
 <h1>Shoutbox</h1>
 <i>This site is meant to be demonstration of XSS and SQL Injection vulnerabilities, for educational purposes only. All posts are cleared every five minutes.</i>
@@ -16,13 +27,13 @@ if(!isset($_SESSION['login_username'])){
 }
 else{
 ?>
-You are logged in as <font color="green"><b><?php echo $_SESSION['login_username']; ?>.</b></font><br>
+<p class="bg-success">You are logged in as <font color="green"><b><?php echo $_SESSION['login_username']; ?>.</b></font><br></p>
 <a href="logout.php">Log out</a><br><br>
 
 <?php
 }
 ?>
-<h2>Public shouts:</h2>
+<h1><small>Public shouts:</small></h1>
 <br>
 <?php
 include('connect.php');
@@ -30,10 +41,12 @@ $sql = "SELECT shout_id, shout_author, shout_content, submission_date FROM shout
 $result = mysqli_query($conn, $sql);
 if (mysqli_num_rows($result) > 0){
 	while($row = mysqli_fetch_assoc($result)){
-		echo "<hr>";		
-		echo "<b>".$row["shout_author"]."</b> posted on ".$row["submission_date"].":<br>";
+		echo "<blockquote>";		
+		echo "<p class='text-muted'><code>".$row["shout_author"]."</code> says...</p>";
 		echo $row["shout_content"];
-		echo "<hr>";
+		
+		echo "<small>posted on ".$row['submission_date']."</small>";
+		echo "</blockquote>";
 	}
 }
 else {
@@ -76,6 +89,6 @@ Confirm Password:<br><input type="password" name="passwordconfirm"><br>
 <?php
 }
 ?>
-
+</div>
 </body>
 </html>
