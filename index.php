@@ -37,7 +37,7 @@
     echo "<div id='shouts'>";
     echo "<h2>Posted shouts</h2>";
 
-    if (mysqli_num_rows($result) > 0) {
+    if (mysql_num_rows($result) && mysqli_num_rows($result) > 0) {
         while($row = mysqli_fetch_assoc($result)) {
             echo "
                 <div class='shout'>
