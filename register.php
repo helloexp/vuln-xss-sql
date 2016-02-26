@@ -23,7 +23,7 @@ if(strlen($username) <= 0 ){
 	echo "<div class='alert alert-danger'>Please enter a username. <a href='/'>Go back</a></div>";
 	exit;
 }
-if(strlen($password) <= 5){
+if(strlen($password) < 5){
 	echo "<div class='alert alert-danger'>Your password must be at least five characters long. <a href='/'>Go back</a></div>";
 	exit;
 }

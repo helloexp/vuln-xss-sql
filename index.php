@@ -7,6 +7,27 @@
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
+<!-- Custom styles for this template -->
+<style>
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
+}
+</style>
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
@@ -17,13 +38,13 @@
 <div class="container">
 
 <h1>Shoutbox</h1>
-<i>This site is meant to be demonstration of XSS and SQL Injection vulnerabilities, for educational purposes only. All posts are cleared every five minutes.</i>
+
 <br>
 <?php
 session_start();
 
 if(!isset($_SESSION['login_username'])){
-	echo "<p class='bg-warning'>You are not logged in. You must log in to post.</p>";
+	echo "<p class='bg-warning'>You are not logged in. You must <a href='#loginbox'>log in</a> to post.</p>";
 }
 else{
 ?>
@@ -74,7 +95,8 @@ else{
 <br>
 <hr>
 <h2>Login</h2>
-<form name="login" role="form" action="login.php" method="post">
+
+<form name="login" role="form" action="login.php" method="post" id="loginbox">
 	<div class="form-group">
 		<label for="username">Username:</label>
 		<input type="text" placeholder="Enter username" class="form-control" name="username">
@@ -108,5 +130,11 @@ else{
 }
 ?>
 </div>
+	<footer class="footer">
+      <div class="container">
+	  <br>
+        <p class="text-muted">Made with <img width="10px" src="https://upload.wikimedia.org/wikipedia/commons/7/77/Heart_symbol_c00.png"> by the Blair Cybersecurity Club</p>
+      </div>
+    </footer>
 </body>
 </html>
