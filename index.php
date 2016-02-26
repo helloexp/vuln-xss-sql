@@ -32,12 +32,12 @@
     include 'connect.php';
 
     $sql = "SELECT * FROM shouts ORDER BY shout_id DESC";
-    $result = mysqli_query($conn, $sql);
+    $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 
     echo "<div id='shouts'>";
     echo "<h2>Posted shouts</h2>";
-
-    if (mysqli_num_rows($result) && mysqli_num_rows($result) > 0) {
+	
+    if (mysqli_num_rows($result) > 0) {
         while($row = mysqli_fetch_assoc($result)) {
             echo "
                 <div class='shout'>
