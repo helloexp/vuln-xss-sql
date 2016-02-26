@@ -139,6 +139,34 @@ else{
 		username: shoutboxr
 		password: UJmAfQrU3Mp4ttFF
 		-->
+		<!--The login function I wrote for the server gives weird database errors sometimes, and I can't figure out why...
+		WTH is wrong????
+		
+		//create a database query
+		//select every row from database where user_name matches [entered username] and user_pass matches [entered password]
+		$sql = "SELECT * FROM users WHERE user_name='".$username."' AND user_pass='".md5($password)."';";
+		//run the query
+		$result = mysqli_query($conn, $sql);
+		//if no result returned
+		if(!$result){
+			//show database error
+			echo "An unexpected database error occurred while logging in. Please try again later. <br><br>";
+			echo "Message from SQL: ".mysqli_error($conn);
+			echo "<br><br>";
+		}
+		
+		if (mysqli_num_rows($result) > 0){ //if there was a match (aka, >0 matching rows)
+			//login successful!
+			$row=mysqli_fetch_assoc($result);
+			$_SESSION['login_username']=$row['user_name'];
+			echo "<div class='alert alert-success'><strong>Login successful.</strong> Click <a href='/'>here</a> to return home.</div>";
+		}
+		else{
+			//zero rows were found
+			//login failed
+			echo "<div class='alert alert-danger'><strong>Incorrect login!</strong> Click <a href='/'>here</a> to return home.</div>";
+		}
+		-->
 	  </div>
     </footer>
 </body>
