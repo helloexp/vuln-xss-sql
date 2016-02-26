@@ -67,10 +67,10 @@
                 <button id='logOut'>Log out</button>
 
                 <div id='postShout'>
-                    <form name='shout' action='action.php?action=post' method='post'>
+                    <form name='shout' action='action.php?action=post' method='get'>
                         <label for='content'>Speak your heart:</label>
                         <textarea name='content'></textarea>
-                        <input type='submit' method='Post' value='Post'>
+                        <input type='submit' method='get' value='Create Post'>
                     </form>
                 </div>
 
