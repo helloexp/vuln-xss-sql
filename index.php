@@ -12,7 +12,10 @@
     <?php
 
     session_start();
-    $message = $_SESSION['message'];
+    if(isset($_SESSION['message'])){
+			$message = $_SESSION['message'];
+	}
+	
     if (isset($message)) {
         echo "<div id='alert'>".$message."</div>";
         unset($_SESSION['message']);
