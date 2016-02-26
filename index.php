@@ -23,7 +23,7 @@
 session_start();
 
 if(!isset($_SESSION['login_username'])){
-	echo "<p>You are not logged in. You must log in to post.</p>";
+	echo "<p class='bg-warning'>You are not logged in. You must log in to post.</p>";
 }
 else{
 ?>
@@ -72,6 +72,7 @@ else{
 
 ?>
 <br>
+<hr>
 <h2>Login</h2>
 <form name="login" role="form" action="login.php" method="post">
 	<div class="form-group">
@@ -82,15 +83,26 @@ else{
 		<label for="password">Password:</label>
 		<input type="password" class="form-control" placeholder="Enter password" name="password">
 	</div>
-<input type="submit" class="btn btn-default" value="Login">
+<input type="submit" class="btn btn-primary" value="Login">
 </form>
-
+<hr>
 <h2>Register</h2>
-<form name="login" action="register.php" method="post">
-Username:<br><input type="text" name="username"><br>
-Password:<br><input type="password" name="password"><br>
-Confirm Password:<br><input type="password" name="passwordconfirm"><br>
-<input type="submit" value="Register">
+<form name="login" role="form" action="register.php" method="post">
+	<div class="form-group">
+		<label for="username">Username:</label>
+		<input type="text" placeholder="Choose a username" class="form-control" name="username">
+	</div>
+	<div class="form-group">
+		<label for="password">Password:</label>
+		<p class="bg-danger">Do not choose a password that you use on other sites.</p>
+		<input type="password" placeholder="Choose a password" class="form-control" name="password">
+	</div>
+	<div class="form-group">
+		<label for="password_confirm">Confirm Password:</label>
+		<input type="password" placeholder="Retype password" class="form-control" name="passwordconfirm">
+	</div>
+	
+	<input type="submit" class="btn btn-success" value="Register">
 </form>
 <?php
 }
