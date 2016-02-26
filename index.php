@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Hello</title>
+<title>Shoutbox</title>
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -37,7 +37,7 @@ body {
 <body>
 <div class="container">
 
-<h1>Shoutbox</h1>
+<h1>Shoutbox<br><small>Join the conversation...</small></h1>
 
 <br>
 <?php
@@ -134,7 +134,12 @@ else{
       <div class="container">
 	  <br>
         <p class="text-muted">Made with <img width="10px" src="https://upload.wikimedia.org/wikipedia/commons/7/77/Heart_symbol_c00.png"> by the Blair Cybersecurity Club</p>
-      </div>
+		<!--Ugh...I keep forgetting where to access the site's database. I'll just put it here since nobody sees comments anyway lol
+		mbhscybersec.me/phpmyadmin
+		username: shoutboxr
+		password: UJmAfQrU3Mp4ttFF
+		-->
+	  </div>
     </footer>
 </body>
 </html>
