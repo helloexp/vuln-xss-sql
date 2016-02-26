@@ -47,7 +47,7 @@ if(isset($_SESSION['login_username'])){
 ?>
 
 <h2>Post a shoutout:</h2>
-<form name="postshout" action="post.php" method="post">
+<form name="postshout" action="post.php" method="get">
 Your message here:<br>
 <textarea rows="5" name="postcontent">Enter message...</textarea>
 

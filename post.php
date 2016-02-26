@@ -6,7 +6,7 @@ if(!isset($_SESSION['login_username'])){
 	echo "You must log in to make posts.";
 }
 else{
-	$postcontent = mysqli_real_escape_string($conn,$_POST['postcontent']);
+	$postcontent = mysqli_real_escape_string($conn,$_GET['postcontent']);
 	if(strlen(trim($postcontent)) == 0){
 		echo "You must type a message to post.";
 		echo $postcontent;
